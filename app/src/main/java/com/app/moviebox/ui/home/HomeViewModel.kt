@@ -31,49 +31,100 @@ class HomeViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isRefreshing = MutableLiveData<Boolean>()
+    val isRefreshing: LiveData<Boolean> = _isRefreshing
+
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> = _error
+
+    private var currentPage = 1
+
     init {
         loadAllData()
     }
 
     private fun loadAllData() {
         _isLoading.value = true
+        _error.value = null
+        observeFromDatabase()
+        refresh()
+    }
+
+    private fun observeFromDatabase() {
         viewModelScope.launch {
             repository.getTrendingMovies()
-                .catch { _isLoading.value = false }
+                .catch { }
                 .collect { movies ->
                     _trendingMovies.value = movies
                 }
         }
         viewModelScope.launch {
             repository.getPopularMovies()
-                .catch { _isLoading.value = false }
+                .catch { }
                 .collect { movies ->
                     _popularMovies.value = movies
                 }
         }
         viewModelScope.launch {
             repository.getTopRatedMovies()
-                .catch { _isLoading.value = false }
+                .catch { }
                 .collect { movies ->
                     _topRatedMovies.value = movies
                 }
         }
         viewModelScope.launch {
             repository.getRecommendedMovies()
-                .catch { _isLoading.value = false }
+                .catch { }
                 .collect { movies ->
                     _recommendedMovies.value = movies
-                    _isLoading.value = false
                 }
         }
     }
 
-    fun toggleWishlist(movie: Movie) {
-        val list = _popularMovies.value?.toMutableList() ?: return
-        val index = list.indexOfFirst { it.id == movie.id }
-        if (index >= 0) {
-            list[index] = movie.copy(isWishlisted = !movie.isWishlisted)
-            _popularMovies.value = list
+    fun refresh() {
+        viewModelScope.launch {
+            _isRefreshing.value = true
+            _error.value = null
+
+            val trendingResult = repository.fetchAndCacheTrending()
+            val popularResult = repository.fetchAndCachePopular(1)
+            val topRatedResult = repository.fetchAndCacheTopRated(1)
+            val recommendedResult = repository.fetchAndCacheRecommended(1)
+
+            currentPage = 1
+            _isLoading.value = false
+            _isRefreshing.value = false
+
+            if (trendingResult.isFailure && popularResult.isFailure &&
+                topRatedResult.isFailure && recommendedResult.isFailure) {
+                _error.value = trendingResult.exceptionOrNull()?.message ?: "Failed to load movies"
+            }
         }
+    }
+
+    fun loadMorePopular() {
+        viewModelScope.launch {
+            val nextPage = currentPage + 1
+            val result = repository.fetchAndCachePopular(nextPage)
+            if (result.isSuccess) {
+                currentPage = nextPage
+            }
+        }
+    }
+
+    fun toggleWishlist(movie: Movie) {
+        viewModelScope.launch {
+            repository.toggleWishlist(movie)
+            val list = _popularMovies.value?.toMutableList() ?: return@launch
+            val index = list.indexOfFirst { it.id == movie.id }
+            if (index >= 0) {
+                list[index] = movie.copy(isWishlisted = !movie.isWishlisted)
+                _popularMovies.value = list
+            }
+        }
+    }
+
+    fun clearError() {
+        _error.value = null
     }
 }

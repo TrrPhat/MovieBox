@@ -20,6 +20,7 @@ import com.app.moviebox.databinding.ItemSectionHeaderBinding
 import com.app.moviebox.ui.home.adapter.BannerAdapter
 import com.app.moviebox.ui.home.adapter.MovieGridAdapter
 import com.app.moviebox.ui.home.adapter.MovieHorizontalAdapter
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -60,6 +61,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupSwipeRefresh()
         setupSectionHeaders()
         setupBanner()
         setupPopularRecyclerView()
@@ -68,18 +70,26 @@ class HomeFragment : Fragment() {
         observeViewModel()
     }
 
+    private fun setupSwipeRefresh() {
+        binding.swipeRefresh.setColorSchemeResources(
+            R.color.gold,
+            R.color.white
+        )
+        binding.swipeRefresh.setProgressBackgroundColorSchemeResource(R.color.card_dark)
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.refresh()
+        }
+    }
+
     private fun setupSectionHeaders() {
-        // Popular section header
         val popularHeaderBinding = ItemSectionHeaderBinding.bind(binding.sectionPopular.root)
         popularHeaderBinding.tvSectionTitle.text = getString(R.string.popular_movies)
         popularHeaderBinding.tvSeeAll.text = getString(R.string.see_all)
 
-        // Top Rated section header
         val topRatedHeaderBinding = ItemSectionHeaderBinding.bind(binding.sectionTopRated.root)
         topRatedHeaderBinding.tvSectionTitle.text = getString(R.string.top_rated_this_week)
         topRatedHeaderBinding.tvSeeAll.text = getString(R.string.see_all)
 
-        // Recommended section header
         val recommendedHeaderBinding = ItemSectionHeaderBinding.bind(binding.sectionRecommended.root)
         recommendedHeaderBinding.tvSectionTitle.text = getString(R.string.recommended_for_you)
         recommendedHeaderBinding.tvSeeAll.text = getString(R.string.see_all)
@@ -132,19 +142,58 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.shimmerBanner.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.bannerContainer.visibility = if (isLoading) View.GONE else View.VISIBLE
+            binding.shimmerPopular.root.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.sectionPopular.root.visibility = if (isLoading) View.GONE else View.VISIBLE
+            binding.recyclerPopular.visibility = if (isLoading) View.GONE else View.VISIBLE
+            binding.shimmerTopRated.root.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.sectionTopRated.root.visibility = if (isLoading) View.GONE else View.VISIBLE
+            binding.recyclerTopRated.visibility = if (isLoading) View.GONE else View.VISIBLE
+            binding.shimmerRecommended.root.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.sectionRecommended.root.visibility = if (isLoading) View.GONE else View.VISIBLE
+            binding.recyclerRecommended.visibility = if (isLoading) View.GONE else View.VISIBLE
+        }
+
+        viewModel.isRefreshing.observe(viewLifecycleOwner) { isRefreshing ->
+            binding.swipeRefresh.isRefreshing = isRefreshing
+        }
+
+        viewModel.error.observe(viewLifecycleOwner) { error ->
+            if (error != null) {
+                showErrorSnackbar(error)
+                viewModel.clearError()
+            }
+        }
+
         viewModel.trendingMovies.observe(viewLifecycleOwner) { movies ->
             bannerAdapter.submitList(movies)
             setupIndicators(movies.size)
         }
+
         viewModel.popularMovies.observe(viewLifecycleOwner) { movies ->
             popularAdapter.submitList(movies)
         }
+
         viewModel.topRatedMovies.observe(viewLifecycleOwner) { movies ->
             topRatedAdapter.submitList(movies)
         }
+
         viewModel.recommendedMovies.observe(viewLifecycleOwner) { movies ->
             recommendedAdapter.submitList(movies)
         }
+    }
+
+    private fun showErrorSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
+            .setAction("Retry") {
+                viewModel.refresh()
+            }
+            .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.card_dark))
+            .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            .setActionTextColor(ContextCompat.getColor(requireContext(), R.color.gold))
+            .show()
     }
 
     private fun setupIndicators(count: Int) {

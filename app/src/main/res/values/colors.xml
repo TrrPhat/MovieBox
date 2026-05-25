@@ -6,5 +6,6 @@
     <color name="dark_background">#2d2408</color>
     <color name="dark_border">#4a3c10</color>
     <color name="dark_surface">#1C1B1F</color>
+    <color name="card_dark">#1C1B1F</color>
 </resources>
 
