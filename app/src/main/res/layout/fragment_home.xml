@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1C1B1F"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Hero Banner ViewPager2 -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="480dp">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerHero"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <!-- Dot Indicators -->
+            <LinearLayout
+                android:id="@+id/indicatorContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center" />
+
+        </FrameLayout>
+
+        <!-- Section: Popular Movies -->
+        <include
+            android:id="@+id/sectionPopular"
+            layout="@layout/item_section_header" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPopular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_movie_card_horizontal" />
+
+        <!-- Section: Top Rated This Week -->
+        <include
+            android:id="@+id/sectionTopRated"
+            layout="@layout/item_section_header" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerTopRated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_movie_card_grid" />
+
+        <!-- Section: Recommended For You -->
+        <include
+            android:id="@+id/sectionRecommended"
+            layout="@layout/item_section_header" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerRecommended"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_movie_card_grid" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

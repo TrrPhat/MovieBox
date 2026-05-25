@@ -1,4 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MovieBox</string>
     <string name="default_web_client_id">156696646036-c32h25mq26qfelemvnijqebf4qet2fve.apps.googleusercontent.com</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_search">Tìm kiếm</string>
+    <string name="nav_wishlist">Yêu thích</string>
+    <string name="nav_profile">Hồ sơ</string>
+
+    <!-- Home Sections -->
+    <string name="trending_now">Trending Now</string>
+    <string name="popular_movies">Phổ biến</string>
+    <string name="top_rated_this_week">Top Đánh Giá Tuần Này</string>
+    <string name="recommended_for_you">Gợi Ý Cho Bạn</string>
+    <string name="see_all">Xem tất cả</string>
+
+    <!-- Hero Banner -->
+    <string name="watch_now">Xem ngay</string>
+    <string name="rating_format">%.1f</string>
+
+    <!-- Search -->
+    <string name="search_hint">Tìm kiếm phim...</string>
+    <string name="search_empty">Không tìm thấy kết quả</string>
+
+    <!-- Wishlist -->
+    <string name="wishlist_empty">Chưa có phim yêu thích</string>
+    <string name="wishlist_empty_desc">Thêm phim vào danh sách yêu thích để xem sau</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Hồ sơ</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="settings">Cài đặt</string>
+    <string name="about">Giới thiệu</string>
 </resources>

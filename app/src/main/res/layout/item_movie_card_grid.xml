@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp">
+
+    <!-- Card Container with aspect ratio 2:3 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPoster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Poster Image -->
+            <ImageView
+                android:id="@+id/ivPoster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/placeholder_poster"
+                tools:background="#555555" />
+
+            <!-- Bottom Gradient Overlay -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/gradient_overlay_bottom" />
+
+            <!-- Wishlist Icon (top-right) -->
+            <ImageView
+                android:id="@+id/ivWishlist"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="8dp"
+                android:background="@drawable/bg_avatar_placeholder"
+                android:padding="5dp"
+                android:src="@drawable/ic_wishlist_outline"
+                app:tint="#F5A623" />
+
+            <!-- Rating Badge (bottom-left, above gradient) -->
+            <LinearLayout
+                android:id="@+id/ratingBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="36dp"
+                android:background="@drawable/bg_rating_badge"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
+
+                <ImageView
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
+                    android:src="@drawable/ic_star"
+                    app:tint="#F5A623" />
+
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="#F5A623"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    tools:text="9.2" />
+
+            </LinearLayout>
+
+            <!-- Movie Title (on gradient) -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="Dune: Part Two" />
+
+        </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

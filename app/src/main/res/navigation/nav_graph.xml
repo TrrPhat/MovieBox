@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.app.moviebox.ui.home.HomeFragment"
+        android:label="@string/nav_home" />
+
+    <fragment
+        android:id="@+id/nav_search"
+        android:name="com.app.moviebox.ui.home.SearchFragment"
+        android:label="@string/nav_search" />
+
+    <fragment
+        android:id="@+id/nav_wishlist"
+        android:name="com.app.moviebox.ui.home.WishlistFragment"
+        android:label="@string/nav_wishlist" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.app.moviebox.ui.home.ProfileFragment"
+        android:label="@string/nav_profile" />
+
+</navigation>
