@@ -106,7 +106,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <!-- EditText Họ tên -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -125,6 +124,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nhập họ và tên"
@@ -147,7 +147,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tilName"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <!-- EditText Email -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmail"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -166,6 +165,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="example@moviebox.com"
@@ -188,7 +188,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tilEmail"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <!-- EditText Mật khẩu -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -209,6 +208,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="••••••••"
@@ -231,7 +231,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tilPassword"
                 app:layout_constraintStart_toStartOf="parent"/>
 
-            <!-- EditText Xác nhận mật khẩu -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilConfirmPassword"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -252,6 +251,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="••••••••"
@@ -377,7 +377,7 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:text="FaceBook"
+            android:text="Facebook"
             android:textColor="#ffffff"
             android:textSize="14sp"
             android:layout_marginTop="14dp"
@@ -390,6 +390,14 @@
             app:layout_constraintStart_toEndOf="@id/btnGoogle"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <!-- Barrier để footer luôn nằm dưới cả 2 nút -->
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierSocial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="btnGoogle,btnFacebook"/>
+
         <!-- Footer -->
         <TextView
             android:id="@+id/tvFooter"
@@ -401,7 +409,20 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:layout_constraintTop_toBottomOf="@id/btnGoogle"
+            app:layout_constraintTop_toBottomOf="@id/barrierSocial"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Progress Indicator — đã chuyển vào trong ConstraintLayout, fix crash -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="#F5A623"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

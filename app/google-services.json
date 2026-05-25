@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "156696646036",
+    "project_id": "moviebox-e5786",
+    "storage_bucket": "moviebox-e5786.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156696646036:android:c4490e14c1397357afbf81",
+        "android_client_info": {
+          "package_name": "com.app.moviebox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156696646036-oal98j6lmklq3tl0l5sf2uqrkgtb8u58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.moviebox",
+            "certificate_hash": "2e7fbe1e3d8f77801ae7957e0be7a012eee3047b"
+          }
+        },
+        {
+          "client_id": "156696646036-c32h25mq26qfelemvnijqebf4qet2fve.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCacet59ELvXSm1p2Hwhf74E8d1InisKvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156696646036-c32h25mq26qfelemvnijqebf4qet2fve.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

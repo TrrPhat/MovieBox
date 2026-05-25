@@ -1,4 +1,4 @@
-package com.app.moivebox
+package com.app.moviebox
 
 import org.junit.Test
 

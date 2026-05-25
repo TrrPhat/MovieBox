@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">MoiveBox</string>
+    <string name="app_name">MovieBox</string>
+    <string name="default_web_client_id">156696646036-c32h25mq26qfelemvnijqebf4qet2fve.apps.googleusercontent.com</string>
 </resources>

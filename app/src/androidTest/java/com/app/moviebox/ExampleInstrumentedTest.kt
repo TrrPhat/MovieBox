@@ -1,4 +1,4 @@
-package com.app.moivebox
+package com.app.moviebox
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

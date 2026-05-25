@@ -121,7 +121,6 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="name@example.com"
                 android:textColor="#ffffff"
                 android:textColorHint="#666666"
                 android:inputType="textEmailAddress"
@@ -176,7 +175,6 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="123456789"
                 android:textColor="#ffffff"
                 android:textColorHint="#666666"
                 android:inputType="textPassword"
@@ -201,18 +199,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Divider HOẶC -->
-        <View
-            android:id="@+id/lineLeft"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#33ffffff"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toBottomOf="@id/btnLogin"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvOr"
-            app:layout_constraintBaseline_toBaselineOf="@id/tvOr"/>
 
         <TextView
             android:id="@+id/tvOr"
@@ -272,6 +258,19 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Progress Indicator -->
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:indicatorColor="#F5A623"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Chưa có tài khoản -->
     <TextView
