@@ -7,6 +7,7 @@
     android:background="#1C1B1F">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -47,6 +48,124 @@
                     android:imeOptions="actionSearch"
                     android:maxLines="1" />
 
+                <ImageView
+                    android:id="@+id/ivClear"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_close"
+                    android:visibility="gone"
+                    android:contentDescription="@string/search_clear" />
+
+            </LinearLayout>
+
+            <!-- Default Content (shown when query < 2 chars) -->
+            <LinearLayout
+                android:id="@+id/defaultContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
+                <!-- Recent Searches Section -->
+                <LinearLayout
+                    android:id="@+id/recentSearchesSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/recent_searches"
+                            android:textColor="#FFFFFF"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvClearHistory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/clear_history"
+                            android:textColor="#F5A623"
+                            android:textSize="13sp"
+                            android:padding="4dp" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerRecentSearches"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </LinearLayout>
+
+                <!-- Browse by Category Section -->
+                <LinearLayout
+                    android:id="@+id/categorySection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/browse_by_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerCategories"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </LinearLayout>
+
+                <!-- Recommended For You Section -->
+                <LinearLayout
+                    android:id="@+id/recommendedSection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recommended_for_you"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="12dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerRecommended"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <!-- Empty State -->
@@ -57,7 +176,7 @@
                 android:layout_marginTop="120dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="80dp"
@@ -67,6 +186,7 @@
                     android:padding="16dp" />
 
                 <TextView
+                    android:id="@+id/tvEmptyMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -77,6 +197,7 @@
 
             </LinearLayout>
 
+            <!-- Search Results Grid -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerSearch"
                 android:layout_width="match_parent"

@@ -2,7 +2,9 @@ package com.app.moviebox.data.repository
 
 import com.app.moviebox.BuildConfig
 import com.app.moviebox.data.local.dao.MovieDao
+import com.app.moviebox.data.local.dao.SearchHistoryDao
 import com.app.moviebox.data.local.entity.MovieEntity
+import com.app.moviebox.data.local.entity.SearchHistoryEntity
 import com.app.moviebox.data.remote.OmdbApiService
 import com.app.moviebox.data.remote.TmdbApiService
 import com.app.moviebox.data.remote.TmdbMovie
@@ -16,7 +18,8 @@ import javax.inject.Singleton
 class MovieRepositoryImpl @Inject constructor(
     private val tmdbApiService: TmdbApiService,
     private val omdbApiService: OmdbApiService,
-    private val movieDao: MovieDao
+    private val movieDao: MovieDao,
+    private val searchHistoryDao: SearchHistoryDao
 ) : MovieRepository {
 
     private val apiKey = BuildConfig.TMDB_API_KEY
@@ -160,6 +163,26 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun toggleWishlist(movie: Movie) {
         movieDao.updateWishlistStatus(movie.id, !movie.isWishlisted)
+    }
+
+    override fun getRecentSearches(): Flow<List<String>> {
+        return searchHistoryDao.getRecentSearches().map { entities ->
+            entities.map { it.query }
+        }
+    }
+
+    override suspend fun saveSearchQuery(query: String) {
+        if (query.isNotBlank()) {
+            searchHistoryDao.insert(SearchHistoryEntity(query = query.trim()))
+        }
+    }
+
+    override suspend fun clearSearchHistory() {
+        searchHistoryDao.clearAll()
+    }
+
+    override suspend fun deleteSearchHistory(query: String) {
+        searchHistoryDao.delete(query)
     }
 
     private fun TmdbMovie.toEntity(type: String): MovieEntity {

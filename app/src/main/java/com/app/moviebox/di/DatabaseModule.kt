@@ -3,6 +3,7 @@ package com.app.moviebox.di
 import android.content.Context
 import com.app.moviebox.data.local.MovieDatabase
 import com.app.moviebox.data.local.dao.MovieDao
+import com.app.moviebox.data.local.dao.SearchHistoryDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,5 +25,11 @@ object DatabaseModule {
     @Singleton
     fun provideMovieDao(database: MovieDatabase): MovieDao {
         return database.movieDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchHistoryDao(database: MovieDatabase): SearchHistoryDao {
+        return database.searchHistoryDao()
     }
 }

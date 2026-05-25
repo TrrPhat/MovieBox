@@ -23,6 +23,11 @@
     <!-- Search -->
     <string name="search_hint">Tìm kiếm phim...</string>
     <string name="search_empty">Không tìm thấy kết quả</string>
+    <string name="search_no_results">No movies found for \"%1$s\"</string>
+    <string name="search_clear">Clear</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="browse_by_category">Browse by Category</string>
+    <string name="clear_history">Clear All</string>
 
     <!-- Wishlist -->
     <string name="wishlist_empty">Chưa có phim yêu thích</string>
